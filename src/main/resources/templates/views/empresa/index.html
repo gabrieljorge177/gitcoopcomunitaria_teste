@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css"  href="assets/css/inicial.css"> 
+</head>
+
+<body>
+	<!--Início do Menu com acesso para as guias do site-->
+	<header>
+		<nav class="navbar navbar-expand-sm Navbar">
+			<div class="container-fluid">
+				<a class="navbard-brand" href="#"><img id="logotipo"
+					src="assets/Img/coopcomunitaria.png" alt="Vogue Agency"></a>
+				<button class="navbar-toggler navbar-light collapsed" type="button"
+					data-bs-toggle="collapse" data-bs-target="#collapseNavbar"
+					aria-controls="navbar-links" aria-expanded="false"
+					aria-label="toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse justify-content-between"
+					id="collapseNavbar">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="assets/paginashtml/index.html">Página inicial</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="paginas_html/sobrenos.jsp">Quem
+								somos</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="paginas_html/servicos.jsp">Serviços</a>
+						</li>
+						<li class="nav-item"><a class="nav-link"
+							href="paginas_html/contato.jsp">Contato</a></li>
+					</ul>
+					<form class="d-flex">
+						<button id="signup-btn" type="button" class="btn btn-primary ml-2">
+							<a href="empresa">Cadastrar</a>
+						</button>
+						<button class="btn ml-2" type="submit">
+							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+								fill="#4654A3" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path fill-rule="evenodd"
+									d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                        </svg>
+						</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!--Início da sessão do menu com o modelo que implementa o CRUD nas tabelas-->
+	<section>
+		<nav class="navbar navbar-light bg-light">
+			<div class="container-fluid">
+				<div class="navbar-collapse">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link text-black"
+							href="./servico" style="color: white;">Cadastro Serviço</a></li>
+						<li class="nav-item"><a class="nav-link text-black"
+							href="./empresa" style="color: white;">Cadastro Empresa</a></li>
+						<li class="nav-item"><a class="nav-link text-black"
+							href="./cliente" style="color: white;">Cadastro Cliente</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</section>
+	<!--Final da sessão do menu com o modelo que implementa o CRUD nas tabelas-->
+	<!--Final do Menu com acesso para as guias do site-->
+	<!--Final da sessão do menu com o modelo que implementa o CRUD nas tabelas-->
+	<!--Início da parte principal que exibe as tabelas para o usuário -->
+	<main>
+		<div class="p-4">
+			<button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mb-2 botao1"> Nova
+				Empresa </button>
+			<table class="table table-responsive table-hover">
+				<thead class="table-dark">
+					<tr>
+						 <th scope="col">Id</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Codigo cadastro</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="e : ${empresas}">
+						<td style="color: #4654A3; background-color: white"th:text="${e.id_empresa}">ID</td>
+                            <td style="color: #4654A3; background-color: white"th:text="${e.nome_empresa}">Nome</td>
+                            <td style="color: #4654A3; background-color: white"th:text="${e.codigo_cadastro}">Código de cadastro</td>
+                            <td style="color: #4654A3; background-color: white"th:text="${e.telefone_empresa}">Telefone da empresa</td>
+                            <td style="color: #4654A3; background-color: white"th:text="${e.email_empresa}">Email da empresa
+							</td>
+                           <td style="background-color: white;">
+						
+
+							<div class="d-flex">
+
+								<div class="d-flex">
+									<a th:href="@{'/empresa'}" data-bs-toggle="modal"
+										th:data-bs-target="'#exampleModal' + ${e.id_empresa}" class="mx-1"
+										title="Editar">
+										<i class="ri-file-edit-line"></i>
+									</a>
+
+									<a th:href="@{'/empresa/' + ${e.id_empresa} + '/excluir'}" class="mx-1" title="Cancelar"
+										onclick="return confirm('Deseja excluir a empresa ?')">
+										<i class="ri-delete-bin-2-line"></i>
+									</a>
+								</div>
+
+								<!-- Modal -->
+								<!-- Modal -->
+								<div class="modal fade" th:id="'exampleModal' + ${e.id_empresa}" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+													title</h1>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form th:action="@{/empresa/cadastrar}" method="post"
+													th:object="${empresa}">
+													<h2 class="text-center">Atualizar</h2>
+													<input type="hidden" id="id_empresa" name="id_empresa"
+														class="form-control" th:value="${e.id_empresa}" />
+													<div class="form-group mb-3">
+														<label for="nome" class="form-label">
+															Nome da empresa
+														</label>
+														<input type="text" id="nome_empresa" name="nome_empresa" class="form-control"
+															th:value="${e.nome_empresa}" />
+													</div>
+
+													<div class="form-group mb-3">
+														<label for="codigo_cadastro" class="form-label">
+															Código de cadastro
+														</label>
+
+														<input type="text" id="codigo_cadastro" name="codigo_cadastro" class="form-control"
+															th:value="${e.codigo_cadastro}" />
+													</div>
+													<div class="form-group mb-3">
+														<label for="telefone" class="form-label">
+															Telefone da empresa
+														</label>
+														<input type="tel" id="telefone_empresa" name="telefone_empresa"
+															class="form-control" th:value="${e.telefone_empresa}" />
+													</div>
+													<div class="form-group mb-3">
+														<label for="email" class="form-label">
+															Email da empresa
+														</label>
+
+														<input type="email" id="email_empresa" name="email_empresa"
+															class="form-control" th:value="${e.email_empresa}" />
+
+																<button type="submit" class="btn btn-primary">
+																	Enviar
+																</button>
+																<a href="./empresa" class="btn btn-danger"
+																	style="margin-left: 10px">
+																	Cancelar
+																</a>
+												</form>
+											</div>
+
+										</div>
+									</div>
+								</div>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+							title</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/empresa/cadastrar}" method="post" th:object="${empresa}">
+							<h2 class="text-center">Cadastrar nova empresa</h2>
+							<div class="form-group mb-3">
+								<label for="nome" class="form-label">
+									Nome da empresa
+								</label>
+								<input type="text" th:id="nome_empresa" th:name="nome_empresa" class="form-control"
+									th:field="*{nome_empresa}" />
+							</div>
+							<div class="form-group mb-3">
+								<label for="email" class="form-label">
+									Código de cadastro da empresa
+								</label>
+								<input type="text" th:id="codigo_cadastro" th:name="codigo_cadastro" class="form-control"
+									th:field="*{codigo_cadastro}" />
+							</div>
+							<div class="form-group mb-3">
+								<label for="telefone" class="form-label">
+									Telefone da empresa
+								</label>
+								<input type="number" th:id="telefone_empresa" th:name="telefone_empresa" class="form-control"
+									th:field="*{telefone_empresa}" />
+							</div>
+							<div class="form-group mb-3">
+								<label for="email" class="form-label">
+									Email da empresa
+								</label>
+								<input type="email" th:id="email_empresa" th:name="email_empresa" class="form-control"
+									th:field="*{email_empresa}" />
+							</div>
+							<button type="submit" class="btn btn-primary">
+								Enviar
+							</button>
+							<a href="./empresa" class="btn btn-danger" style="margin-left: 10px">
+								Cancelar
+							</a>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
+	</main>
+	<!--Final da parte principal que exibe as tabelas para o usuário -->
+	<!--Início do rodapé das páginas-->
+	<footer>
+		<div id="footer_content">
+			<div id="footer_contacts">
+				<a href="#" class="logo"> <img class="cabecalho_logo"
+					src="../../assets/Img/coopcomunitaria.png" alt="Logo da Vogue">
+				</a>
+				<p>A empresa para realizar seus sonhos com a melhor experiência</p>
+				<div id="footer_social_media">
+					<a href="#" class="footer_link" id="instagram"> <i
+						class="fa-brands fa-instagram"></i>
+					</a> <a href="#" class="footer_link" id="facebook"> <i
+						class="fa-brands fa-facebook-f"></i>
+					</a> <a href="#" class="footer_link" id="whatsapp"> <i
+						class="fa-brands fa-whatsapp"></i>
+					</a>
+				</div>
+			</div>
+			<ul class="footer_list">
+				<li>
+					<h3>Categorias de viagens</h3>
+				</li>
+				<li><a href="#" class="footer_link">Ecoturismo</a></li>
+				<li><a href="#" class="footer_link">Cidades paradisíacas</a></li>
+				<li><a href="#" class="footer_link">Cidades Históricas</a></li>
+			</ul>
+			<ul class="footer_list">
+				<li>
+					<h3>Produtos</h3>
+				</li>
+				<li><a href="#" class="footer_link">Aluguel de carros</a></li>
+				<li><a href="#" class="footer_link">Shows</a></li>
+				<li><a href="#" class="footer_link">Hospedagem</a></li>
+			</ul>
+			<div id="footer_subscribe">
+				<h2>Inscreva-se</h2>
+				<p>Digite seu email para receber nossas promoções de viagem</p>
+				<div id="input_group">
+					<input type="email" id="email">
+					<button>
+						<i class="fa-regular fa-envelope"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div id="footer_copyright">&#169 2023</div>
+	</footer>
+	<!--Final do rodapé das páginas-->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
